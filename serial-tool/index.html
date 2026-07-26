@@ -1,0 +1,2619 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>因为相信，所以看见。 | 因为相信，所以看见。</title><meta name="author" content="zhuzhu"><meta name="copyright" content="zhuzhu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="串口数据可视化 — zjl的电机调试工具    &#x2F;* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;    墨晕星河 — 串口数据可视化工具    设计体系：暗色工作台 × 紫色星云 × 终端质感    &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="因为相信，所以看见。">
+<meta property="og:url" content="http://example.com/serial-tool/index.html">
+<meta property="og:site_name" content="因为相信，所以看见。">
+<meta property="og:description" content="串口数据可视化 — zjl的电机调试工具    &#x2F;* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;    墨晕星河 — 串口数据可视化工具    设计体系：暗色工作台 × 紫色星云 × 终端质感    &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2026-07-26T13:06:07.301Z">
+<meta property="article:modified_time" content="2026-07-26T13:06:07.194Z">
+<meta property="article:author" content="zhuzhu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/serial-tool/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '因为相信，所以看见。',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:opsz,wght@22,400;22,600;22,700&display=swap" rel="stylesheet"><style>/* === 墨晕星河 — 设计系统 === */:root{--ink:#1a1a2e;--paper:#f8f5f0;--card:#fffefb;--purple:#8954D6;--purple-deep:#6b3fa0;--purple-light:#c4a6e8;--stone:#5a5a6e;--mist:#9a9aae}body{background-color:var(--paper)}#body-wrap{background:var(--paper)}#page-header{background-color:#050510!important;position:relative}#page-header.full_page{border-bottom:2px solid rgba(137,84,214,0.25);box-shadow:0 4px 24px rgba(137,84,214,0.06)}#site-title{display:none!important}#site-subtitle{font-family:"Ma Shan Zheng",cursive!important;font-size:3.2rem!important;font-weight:400!important;color:#fff!important;letter-spacing:6px!important;text-shadow:0 0 60px rgba(196,166,232,0.3)!important}#content-inner{background-color:var(--paper);background-image:radial-gradient(circle at 15% 30%,rgba(108,76,154,0.03) 0px,transparent 1.5px),radial-gradient(circle at 85% 60%,rgba(108,76,154,0.02) 0px,transparent 2px),radial-gradient(circle at 40% 80%,rgba(108,76,154,0.025) 0px,transparent 1px),radial-gradient(circle at 70% 18%,rgba(108,76,154,0.015) 0px,transparent 2.5px);background-size:28px 28px,36px 36px,24px 24px,32px 32px;position:relative}@keyframes floatBlob1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}@keyframes floatBlob2{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,25px)}}#content-inner::before{content:"";position:fixed;top:55%;left:88%;width:320px;height:320px;background:radial-gradient(circle,rgba(137,84,214,0.03),transparent 70%);border-radius:50%;pointer-events:none;z-index:0;animation:floatBlob1 14s ease-in-out infinite}#content-inner::after{content:"";position:fixed;top:75%;left:3%;width:280px;height:280px;background:radial-gradient(circle,rgba(137,84,214,0.025),transparent 70%);border-radius:50%;pointer-events:none;z-index:0;animation:floatBlob2 16s ease-in-out infinite}/* -- 文章卡片 -- */#recent-posts>.recent-post-item{background:var(--card)!important;color:#2d2d3a!important;box-shadow:0 1px 3px rgba(108,76,154,0.04),0 4px 24px rgba(108,76,154,0.06)!important;border-radius:12px!important;border:1px solid rgba(108,76,154,0.06)!important;transition:all .4s cubic-bezier(.25,.46,.45,.94)!important;position:relative;overflow:hidden;padding:1.8rem 2rem!important}#recent-posts>.recent-post-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--purple-light),var(--purple),var(--purple-deep));opacity:0;border-radius:0 2px 2px 0;transition:opacity .4s ease}#recent-posts>.recent-post-item:hover{box-shadow:0 2px 6px rgba(108,76,154,0.08),0 8px 40px rgba(108,76,154,0.12)!important;transform:translateY(-3px)!important}#recent-posts>.recent-post-item:hover::before{opacity:1}#recent-posts .article-title a{color:var(--ink)!important;font-family:"Noto Serif SC","Source Han Serif SC","SimSun",serif!important;font-weight:600!important;font-size:1.35rem!important;letter-spacing:.02em!important;line-height:1.5!important}#recent-posts .article-title a:hover{color:var(--purple)!important}#recent-posts .article-meta,#recent-posts .article-meta a,#recent-posts .article-meta span,#recent-posts .article-meta i{color:var(--mist)!important}#recent-posts .content{color:var(--stone)!important;line-height:1.8!important}/* -- 文章详情页 -- */#post{background:var(--card);border-radius:12px;box-shadow:0 1px 3px rgba(108,76,154,0.04),0 4px 24px rgba(108,76,154,0.06);border:1px solid rgba(108,76,154,0.06);padding:2rem 2.5rem;margin-bottom:1.5rem}#post .post-title{font-family:"Noto Serif SC","Source Han Serif SC",serif!important}#article-container{font-family:"Noto Serif SC","Source Han Serif SC","SimSun",serif;line-height:1.9;color:var(--ink)}/* -- 侧边栏 -- */#aside-content .card-widget{background:var(--card)!important;color:#3d3d4a!important;box-shadow:0 1px 3px rgba(108,76,154,0.04),0 4px 24px rgba(108,76,154,0.06)!important;border-radius:12px!important;border:1px solid rgba(108,76,154,0.06)!important}#aside-content .item-headline{color:var(--ink)!important;font-family:"Noto Serif SC",serif!important;font-weight:600!important}#aside-content a{color:var(--stone)!important}#aside-content a:hover{color:var(--purple)!important}#aside-content .card-announcement a,#aside-content .card-categories a,#aside-content .card-tags a{color:#666!important}#aside-content .aside-list .aside-list-item .title,#aside-content .aside-list .aside-list-item .comment{color:#444!important}#aside-content .card-info-item,#aside-content .webinfo-item{color:#666!important}#aside-content .card-info-item span,#aside-content .webinfo-item span{color:var(--mist)!important}#aside-content #card-info-btn,#aside-content #card-info-btn span,#aside-content #card-info-btn i{background:var(--purple)!important;color:#fff!important;border:none!important;border-radius:6px!important;transition:all .3s!important;text-decoration:none!important}#aside-content #card-info-btn:hover,#aside-content #card-info-btn:hover span,#aside-content #card-info-btn:hover i{background:var(--purple-deep)!important;color:#fff!important}/* -- 分页 -- */#pagination .page-number{background:var(--card)!important;color:var(--stone)!important;box-shadow:0 1px 3px rgba(108,76,154,0.04),0 2px 12px rgba(108,76,154,0.06)!important;border-radius:8px!important}#pagination .page-number.current{background:var(--purple)!important;color:#fff!important}/* -- 页脚：深色收束 -- */#footer{background:var(--ink)!important;color:var(--mist)!important;box-shadow:none!important;border-top:1px solid rgba(255,255,255,0.06)!important;padding:2rem 0!important}#footer a{color:var(--purple-light)!important}#footer .copyright{color:var(--mist)!important}#footer .framework-info,#footer .framework-info a{color:#6a6a7e!important}#footer .framework-info a:hover{color:var(--purple-light)!important}/* -- 导航栏 -- */#nav{background:rgba(5,5,16,0.9)!important;backdrop-filter:blur(8px)!important}#nav #site-name,#nav .menus_items .menus_item>a{color:#fff!important}#nav .menus_items .menus_item>a:hover{color:var(--purple-light)!important}#nav #search-button{color:#fff!important}/* -- 子页面标题 -- */.not-home-page #site-title{display:block!important;font-family:"Noto Serif SC",serif!important;font-weight:600!important;color:#fff!important;text-shadow:0 0 40px rgba(196,166,232,0.2)!important}/* -- 标签云 -- */.card-tag-cloud a{transition:all .3s!important}.card-tag-cloud a:hover{color:var(--purple)!important;transform:scale(1.08)}/* -- 归档/分类列表 -- */.card-archive-list-link:hover,.card-category-list-link:hover{color:var(--purple)!important;padding-left:4px;transition:all .3s}/* -- 评论区：只在文章和留言板显示 -- */#post-comment{display:none}.type-post #post-comment,.type-guestbook #post-comment,#post #post-comment{display:block}#post-comment .comment-head .comment-headline{font-family:"Noto Serif SC",serif!important;color:var(--ink)!important}#utterances-wrap,#giscus{margin-top:1rem}/* -- highlights.js 代码块适配 -- */figure.highlight{background:#f4f2ed!important;border-radius:8px!important;border:1px solid rgba(108,76,154,0.08)!important}</style><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/serial-tool/"><i class="fa-fw fas fa-microchip"></i><span> 串口工具</span></a></div><div class="menus_item"><a class="site-page" href="/guestbook/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">因为相信，所以看见。</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/serial-tool/"><i class="fa-fw fas fa-microchip"></i><span> 串口工具</span></a></div><div class="menus_item"><a class="site-page" href="/guestbook/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title"></h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="container" id="article-container"><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>串口数据可视化 — zjl的电机调试工具</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:opsz,wght@22,400;22,600;22,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   墨晕星河 — 串口数据可视化工具
+   设计体系：暗色工作台 × 紫色星云 × 终端质感
+   ============================================================================ */
+
+/* ----- Design Tokens ----- */
+:root {
+  --bg-deep:        #050510;
+  --surface:        #0d0d1a;
+  --surface-raised: #15152a;
+  --surface-1:      #0d0d1a;   /* JS SVG 引用 */
+  --purple:         #8954D6;
+  --purple-glow:    #c4a6e8;
+  --purple-deep:    #6b3fa0;
+  --text-primary:   #e8e4f0;
+  --text-secondary: #9a9aae;
+  --text-muted:     #6a6a7e;
+  --gridline:       rgba(137,84,214,0.10);
+  --baseline:       rgba(137,84,214,0.18);
+  --border:         rgba(137,84,214,0.12);
+  --success:        #4ecb71;
+  --danger:         #e0556a;
+  --series-left:    #8954D6;
+  --series-right:   #c4a6e8;
+
+  --font-display:   "Ma Shan Zheng", cursive;
+  --font-heading:   "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-body:      system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+  --font-mono:      "JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+}
+
+/* ----- Reset ----- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+/* ----- Body & Cosmic Background ----- */
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 星云光斑 — 慢速浮动 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 15% 20%, rgba(137,84,214,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 85% 60%, rgba(108,76,154,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 350px at 50% 85%, rgba(137,84,214,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 300px at 70% 10%, rgba(196,166,232,0.03) 0%, transparent 70%);
+  animation: nebulaDrift 20s ease-in-out infinite;
+}
+
+@keyframes nebulaDrift {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* 微细星点网格 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 55% 45%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 30% 90%, rgba(255,255,255,0.2), transparent);
+  background-size: 200px 200px;
+}
+
+/* ----- Container ----- */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Header ----- */
+.page-header {
+  text-align: center;
+  padding: 32px 0 8px;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: color 0.25s;
+}
+
+.back-link:hover {
+  color: var(--purple-glow);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 80px rgba(196,166,232,0.25), 0 0 160px rgba(137,84,214,0.12);
+  line-height: 1.3;
+}
+
+.page-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+}
+
+/* ----- Cards ----- */
+.input-card,
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow:
+    0 1px 3px rgba(137,84,214,0.04),
+    0 8px 32px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(137,84,214,0.04);
+  transition: border-color 0.3s ease;
+  position: relative;
+}
+
+.input-card:hover {
+  border-color: rgba(137,84,214,0.22);
+}
+
+.input-card h1 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.input-card .subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* ----- Terminal Textarea — 签名元素 ----- */
+textarea {
+  width: 100%;
+  height: 170px;
+  padding: 16px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #c4a6e8;
+  background: #070712;
+  border: 1px solid rgba(137,84,214,0.18);
+  border-radius: 8px;
+  resize: vertical;
+  outline: none;
+  caret-color: #c4a6e8;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  tab-size: 4;
+  /* 微细扫描线 */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(137,84,214,0.018) 2px,
+      rgba(137,84,214,0.018) 4px
+    );
+}
+
+textarea:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(137,84,214,0.10), 0 0 20px rgba(137,84,214,0.08);
+}
+
+textarea::placeholder {
+  color: rgba(196,166,232,0.2);
+}
+
+textarea:read-only {
+  color: #b8a8d8;
+  cursor: default;
+}
+
+/* ----- Buttons ----- */
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary,
+#btn-render,
+.btn-serial {
+  padding: 8px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--purple), var(--purple-deep));
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(137,84,214,0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover,
+#btn-render:hover,
+.btn-serial:hover {
+  box-shadow: 0 4px 16px rgba(137,84,214,0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active,
+#btn-render:active,
+.btn-serial:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(137,84,214,0.15);
+}
+
+#btn-render:disabled,
+#btn-example:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-ghost,
+#btn-example {
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--baseline);
+  border-radius: 6px;
+}
+
+.btn-ghost:hover,
+#btn-example:hover {
+  background: rgba(137,84,214,0.08);
+  border-color: rgba(137,84,214,0.3);
+  color: var(--text-primary);
+}
+
+/* ----- Input Row ----- */
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* ----- Stats ----- */
+.stats {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.stats span { white-space: nowrap; }
+.stats strong { color: var(--text-primary); font-weight: 600; }
+
+/* ----- Serial Bar ----- */
+.serial-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.serial-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.serial-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.serial-status.connected .dot {
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(78,203,113,0.5), 0 0 16px rgba(78,203,113,0.2);
+}
+
+.serial-status.connected {
+  color: var(--success);
+}
+
+.serial-status-text {
+  font-variant-numeric: tabular-nums;
+}
+
+.baud-select {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--baseline);
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.baud-select:focus {
+  border-color: var(--purple);
+}
+
+.btn-serial {
+  font-size: 0.8rem;
+  padding: 6px 16px;
+}
+
+.btn-serial.connected {
+  background: var(--danger);
+  box-shadow: 0 2px 8px rgba(224,85,106,0.2);
+}
+
+.btn-serial.connected:hover {
+  background: #c94d5e;
+  box-shadow: 0 4px 16px rgba(224,85,106,0.35);
+}
+
+.btn-clear-serial {
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--baseline);
+  border-radius: 6px;
+}
+
+.btn-clear-serial:hover {
+  background: rgba(224,85,106,0.08);
+  border-color: rgba(224,85,106,0.3);
+  color: var(--danger);
+}
+
+.serial-count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+
+/* ----- Mode Tabs ----- */
+.mode-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.mode-btn {
+  padding: 7px 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--baseline);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: var(--font-body);
+}
+
+.mode-btn:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.mode-btn:last-child {
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+}
+
+.mode-btn.active {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+  box-shadow: 0 2px 12px rgba(137,84,214,0.3);
+}
+
+.mode-btn.active + .mode-btn {
+  border-left: 1px solid var(--purple);
+}
+
+.mode-btn:not(.active):hover {
+  background: rgba(137,84,214,0.06);
+  color: var(--text-secondary);
+}
+
+/* ----- Parse Error ----- */
+.parse-error {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--danger);
+  display: none;
+  padding: 8px 12px;
+  background: rgba(224,85,106,0.08);
+  border: 1px solid rgba(224,85,106,0.2);
+  border-radius: 6px;
+}
+
+/* ----- Chart Card ----- */
+.chart-card {
+  padding: 20px 24px 16px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.chart-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-swatch.left  { background: var(--series-left);  box-shadow: 0 0 6px rgba(137,84,214,0.4); }
+.legend-swatch.right { background: var(--series-right); box-shadow: 0 0 6px rgba(196,166,232,0.4); }
+
+/* Chart wrapper */
+.chart-wrapper {
+  position: relative;
+  user-select: none;
+}
+
+svg.viz {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  border-radius: 6px;
+}
+
+/* ----- Tooltip ----- */
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--surface-raised);
+  border: 1px solid rgba(137,84,214,0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(137,84,214,0.06);
+  z-index: 10;
+  transition: opacity 0.08s;
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+}
+
+.tooltip.active { opacity: 1; }
+
+.tooltip .tt-time {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+}
+
+.tooltip .tt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.tooltip .tt-key {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.tooltip .tt-line {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.tooltip .tt-line.left  { background: var(--series-left);  box-shadow: 0 0 4px rgba(137,84,214,0.5); }
+.tooltip .tt-line.right { background: var(--series-right); box-shadow: 0 0 4px rgba(196,166,232,0.5); }
+
+.tooltip .tt-val {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+/* ----- Download Dropdown ----- */
+.download-wrap {
+  position: relative;
+}
+
+.btn-download {
+  padding: 5px 14px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--baseline);
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+
+.btn-download:hover {
+  background: rgba(137,84,214,0.08);
+  border-color: rgba(137,84,214,0.3);
+  color: var(--text-primary);
+}
+
+.download-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 6px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  z-index: 20;
+  min-width: 140px;
+  overflow: hidden;
+}
+
+.download-menu.open {
+  display: block;
+}
+
+.download-menu button {
+  display: block;
+  width: 100%;
+  padding: 9px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+
+.download-menu button:hover {
+  background: rgba(137,84,214,0.1);
+  color: var(--text-primary);
+}
+
+/* ----- Data Actions Row ----- */
+.data-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ----- Table Toggle ----- */
+.table-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  font-family: var(--font-body);
+  transition: color 0.2s;
+}
+
+.table-toggle:hover { color: var(--text-primary); }
+
+/* ----- CSV Button ----- */
+.btn-csv {
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--baseline);
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+
+.btn-csv:hover {
+  background: rgba(137,84,214,0.08);
+  border-color: rgba(137,84,214,0.3);
+  color: var(--text-primary);
+}
+
+/* ----- Data Table ----- */
+.table-wrap {
+  width: 100%;
+  max-height: 360px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: none;
+  margin-top: 8px;
+  background: var(--surface-raised);
+}
+
+.table-wrap.open { display: block; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th {
+  text-align: right;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border-bottom: 1px solid var(--baseline);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+th:first-child { text-align: left; }
+
+td {
+  text-align: right;
+  padding: 6px 14px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--gridline);
+  transition: background 0.15s;
+}
+
+td:first-child {
+  text-align: left;
+  color: var(--text-muted);
+}
+
+tbody tr:hover td {
+  background: rgba(137,84,214,0.04);
+  color: var(--text-primary);
+}
+
+/* ----- Empty State ----- */
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  border-style: dashed;
+}
+
+.empty-state::before {
+  content: "⋆⭒˚";
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+/* ----- Scrollbar ----- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(137,84,214,0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(137,84,214,0.4);
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 700px) {
+  .container { padding: 24px 16px 40px; gap: 18px; }
+  .page-title { font-size: 2rem; }
+  .input-card, .chart-card { padding: 16px; }
+  .chart-header { flex-direction: column; gap: 6px; }
+  .stats { margin-left: 0; width: 100%; }
+  .input-row { flex-direction: column; align-items: flex-start; }
+  textarea { height: 140px; font-size: 0.72rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <a href="/" class="back-link">← 返回博客</a>
+    <h1 class="page-title">串口数据可视化</h1>
+    <p class="page-subtitle">电机实时调试工具 · Web Serial API</p>
+  </header>
+
+  <!-- Input -->
+  <div class="input-card">
+    <h1>数据输入</h1>
+    <p class="subtitle">粘贴 LeftSpeed / Lefterror / LeftDuty / RightSpeed / Righterror / RightDuty 数据，每组间隔 0.1s</p>
+    <textarea id="input" placeholder="LeftSpeed:620.874634&#10;Lefterror:-109.159973&#10;LeftDuty:0.358146&#10;RightSpeed:632.589233&#10;Righterror:-132.589233&#10;RightDuty:0.335515&#10;..."></textarea>
+    <div class="input-row">
+      <button id="btn-render">生成折线图</button>
+      <button id="btn-example" class="btn-ghost">加载示例数据</button>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="serial-bar">
+      <span class="serial-status" id="serial-status">
+        <span class="dot"></span>
+        <span class="serial-status-text">未连接</span>
+      </span>
+      <select class="baud-select" id="baud-rate">
+        <option value="115200">115200</option>
+        <option value="9600">9600</option>
+      </select>
+      <button class="btn-serial" id="btn-serial-connect">连接串口</button>
+      <button class="btn-clear-serial" id="btn-clear-serial" style="display:none;">清空数据</button>
+      <span class="serial-count" id="serial-count" style="display:none;"></span>
+    </div>
+    <div class="mode-bar" id="mode-bar" style="display:none;">
+      <button class="mode-btn active" id="mode-time">时域图表</button>
+      <button class="mode-btn" id="mode-rotation">旋转调试</button>
+    </div>
+    <div class="parse-error" id="parse-error"></div>
+  </div>
+
+  <!-- Charts injected here -->
+  <div id="charts-area"></div>
+
+  <!-- Empty state -->
+  <div class="empty-state" id="empty-state">在上方粘贴数据并点击「生成折线图」以查看可视化结果</div>
+
+  <!-- Data table + CSV -->
+  <div class="data-actions">
+    <button class="table-toggle" id="table-toggle" style="display:none;">
+      <span id="table-arrow">▸</span> 数据表格
+    </button>
+    <button class="btn-csv" id="btn-csv" style="display:none;">📥 导出 CSV</button>
+  </div>
+  <div class="table-wrap" id="table-wrap"></div>
+</div>
+
+<script>
+// ============================================================================
+// Data parsing
+// ============================================================================
+const KEYS = ['LeftSpeed', 'Lefterror', 'LeftDuty', 'RightSpeed', 'Righterror', 'RightDuty'];
+
+function parseData(text) {
+  const pairs = text.match(/([A-Za-z]+):(-?[\d.]+)/g);
+  if (!pairs) return [];
+
+  const samples = [];
+  let current = {};
+
+  for (const pair of pairs) {
+    const [key, val] = pair.split(':');
+    current[key] = parseFloat(val);
+
+    if (KEYS.every(k => k in current)) {
+      samples.push({ ...current });
+      current = {};
+    }
+  }
+
+  return samples;
+}
+
+// ============================================================================
+// Chart rendering
+// ============================================================================
+
+// Nice tick algorithm
+function niceTicks(min, max, targetCount = 5) {
+  const range = max - min || 1;
+  const rough = range / (targetCount - 1);
+  const mag = Math.pow(10, Math.floor(Math.log10(rough)));
+  const norm = rough / mag;
+  let step;
+  if (norm <= 1.5) step = 1;
+  else if (norm <= 3) step = 2;
+  else if (norm <= 7) step = 5;
+  else step = 10;
+  step *= mag;
+
+  const lo = Math.floor(min / step) * step;
+  const hi = Math.ceil(max / step) * step;
+  const ticks = [];
+  for (let v = lo; v <= hi + step * 0.5; v += step) {
+    ticks.push(parseFloat(v.toFixed(10)));
+  }
+  return ticks;
+}
+
+function formatNum(n, decimals = 2) {
+  if (Math.abs(n) >= 10000) return n.toFixed(0);
+  if (Math.abs(n) >= 1000) return n.toFixed(1);
+  return n.toFixed(decimals);
+}
+
+function buildChartSVG(samples, seriesA, seriesB, titleA, titleB, yLabel, decimals, timesOverride) {
+  const MARGIN = { top: 8, right: 36, bottom: 32, left: 56 };
+  const WIDTH = 900;
+  const HEIGHT = 260;
+  const PW = WIDTH - MARGIN.left - MARGIN.right;
+  const PH = HEIGHT - MARGIN.top - MARGIN.bottom;
+
+  // Extract arrays — use timesOverride for real-time serial data, fixed 0.1s interval otherwise
+  const times = timesOverride || samples.map((_, i) => i * 0.1);
+  const valsA = samples.map(s => s[seriesA]);
+  const valsB = seriesB ? samples.map(s => s[seriesB]) : [];
+  const singleSeries = !seriesB;
+
+  // Compute y-scale
+  const allVals = singleSeries ? [...valsA] : [...valsA, ...valsB];
+  let yMin = Math.min(...allVals);
+  let yMax = Math.max(...allVals);
+  const yPad = (yMax - yMin) * 0.12 || Math.max(Math.abs(yMin) * 0.1, 1);
+  yMin -= yPad;
+  yMax += yPad;
+
+  const ticks = niceTicks(yMin, yMax, 5);
+  const tickMin = ticks[0];
+  const tickMax = ticks[ticks.length - 1];
+
+  const xScale = t => MARGIN.left + (t / times[times.length - 1]) * PW;
+  const yScale = v => MARGIN.top + (1 - (v - tickMin) / (tickMax - tickMin)) * PH;
+
+  // Build points strings
+  const ptsA = valsA.map((v, i) => `${xScale(times[i])},${yScale(v)}`).join(' ');
+  const ptsB = singleSeries ? '' : valsB.map((v, i) => `${xScale(times[i])},${yScale(v)}`).join(' ');
+
+  const svg = [];
+  const S = (s) => svg.push(s);
+
+  S(`<svg class="viz" viewBox="0 0 ${WIDTH} ${HEIGHT}" xmlns="http://www.w3.org/2000/svg">`);
+  S(`<rect width="100%" height="100%" fill="var(--surface-1)"/>`);
+
+  // Gridlines
+  S(`<g class="gridlines">`);
+  for (const t of ticks) {
+    const y = yScale(t);
+    S(`<line x1="${MARGIN.left}" x2="${WIDTH - MARGIN.right}" y1="${y}" y2="${y}" stroke="var(--gridline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`);
+  }
+  S(`</g>`);
+
+  // Baseline
+  S(`<line x1="${MARGIN.left}" x2="${WIDTH - MARGIN.right}" y1="${yScale(tickMin)}" y2="${yScale(tickMin)}" stroke="var(--baseline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`);
+
+  // Y-axis ticks
+  S(`<g class="y-ticks" fill="var(--text-muted)" font-size="11" font-family="var(--font-mono)" text-anchor="end">`);
+  for (const t of ticks) {
+    const y = yScale(t);
+    S(`<text x="${MARGIN.left - 8}" y="${y + 4}">${formatNum(t, decimals)}</text>`);
+  }
+  S(`</g>`);
+
+  // X-axis ticks
+  const xTickCount = Math.min(10, times.length);
+  const xStep = Math.max(1, Math.floor(times.length / xTickCount));
+  S(`<g class="x-ticks" fill="var(--text-muted)" font-size="11" font-family="var(--font-mono)" text-anchor="middle">`);
+  for (let i = 0; i < times.length; i += xStep) {
+    const x = xScale(times[i]);
+    const y = MARGIN.top + PH + 18;
+    S(`<text x="${x}" y="${y}">${times[i].toFixed(1)}s</text>`);
+  }
+  // Final tick
+  if ((times.length - 1) % xStep > xStep / 2 || xStep >= times.length) {
+    const last = times.length - 1;
+    if (last > 0 && last % xStep !== 0) {
+      S(`<text x="${xScale(times[last])}" y="${MARGIN.top + PH + 18}">${times[last].toFixed(1)}s</text>`);
+    }
+  }
+  S(`</g>`);
+
+  // Series lines
+  S(`<polyline points="${ptsA}" fill="none" stroke="var(--series-left)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" class="line-a"/>`);
+  if (!singleSeries) {
+    S(`<polyline points="${ptsB}" fill="none" stroke="var(--series-right)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" class="line-b"/>`);
+  }
+
+  // End markers — r=5 with stroke-width=2 surface ring → 8px visible fill, 2px ring
+  const markerPairs = singleSeries
+    ? [[valsA, 'left']]
+    : [[valsA, 'left'], [valsB, 'right']];
+  for (const [vals, clazz] of markerPairs) {
+    const lastIdx = vals.length - 1;
+    const cx = xScale(times[lastIdx]);
+    const cy = yScale(vals[lastIdx]);
+    const colorVar = clazz === 'left' ? 'var(--series-left)' : 'var(--series-right)';
+    // Single circle: 2px stroke in surface color acts as ring, 8px fill (r=5, stroke=2 → inner fill visible to r=4)
+    S(`<circle cx="${cx}" cy="${cy}" r="5" fill="${colorVar}" stroke="var(--surface-1)" stroke-width="2" class="marker-${clazz}"/>`);
+  }
+
+  // End labels — skip if lines converge (within 18px vertically) per anti-collision rule;
+  // the legend + tooltip already carry the values
+  let labelCollision = false;
+  if (!singleSeries) {
+    const endYA = yScale(valsA[valsA.length - 1]);
+    const endYB = yScale(valsB[valsB.length - 1]);
+    labelCollision = Math.abs(endYA - endYB) < 18;
+  }
+
+  if (!labelCollision) {
+    const labelPairs = singleSeries
+      ? [[valsA, titleA, 'left']]
+      : [[valsA, titleA, 'left'], [valsB, titleB, 'right']];
+    for (const [vals, label, clazz] of labelPairs) {
+      const lastIdx = vals.length - 1;
+      const cx = xScale(times[lastIdx]);
+      const cy = yScale(vals[lastIdx]);
+      S(`<text x="${cx + 8}" y="${cy + 4}" fill="var(--text-secondary)" font-size="11" font-family="var(--font-body)">${label} ${formatNum(vals[lastIdx], decimals)}</text>`);
+    }
+  }
+
+  // Crosshair line (hidden by default)
+  S(`<line class="crosshair" x1="0" y1="${MARGIN.top}" x2="0" y2="${MARGIN.top + PH}" stroke="var(--baseline)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>`);
+
+  // Hit area
+  S(`<rect class="hit-area" x="${MARGIN.left}" y="${MARGIN.top}" width="${PW}" height="${PH}" fill="transparent" pointer-events="all"/>`);
+
+  S(`</svg>`);
+
+  return {
+    svg: svg.join('\n'),
+    times,
+    valsA,
+    valsB,
+    xScale,
+    yScale,
+    MARGIN,
+    PW,
+    PH,
+    tickMin,
+    tickMax
+  };
+}
+
+// ============================================================================
+// Main render
+// ============================================================================
+const EXAMPLE_DATA = `LeftSpeed:620.874634 Lefterror:-109.159973 LeftDuty:0.358146 RightSpeed:632.589233 Righterror:-132.589233 RightDuty:0.335515 LeftSpeed:574.016174 Lefterror:-74.016174 LeftDuty:0.351942 RightSpeed:620.874634 Righterror:-120.874634 RightDuty:0.311341 LeftSpeed:538.872314 Lefterror:-38.872314 LeftDuty:0.356282 RightSpeed:609.159973 Righterror:-109.159973 RightDuty:0.282879 LeftSpeed:480.299225 Lefterror:31.415375 LeftDuty:0.372522 RightSpeed:644.303833 Righterror:-144.303833 RightDuty:0.238017 LeftSpeed:398.296936 Lefterror:125.132294 LeftDuty:0.421377 RightSpeed:702.876953 Righterror:-226.306152 RightDuty:0.177527 LeftSpeed:246.006927 Lefterror:253.993073 LeftDuty:0.500000 RightSpeed:843.452332 Righterror:-378.596130 RightDuty:0.060000`;
+
+const inputEl = document.getElementById('input');
+const btnEl = document.getElementById('btn-render');
+const btnExample = document.getElementById('btn-example');
+const statsEl = document.getElementById('stats');
+const errorEl = document.getElementById('parse-error');
+const chartsArea = document.getElementById('charts-area');
+const emptyState = document.getElementById('empty-state');
+const tableToggle = document.getElementById('table-toggle');
+const tableWrap = document.getElementById('table-wrap');
+const tableArrow = document.getElementById('table-arrow');
+const btnCsv = document.getElementById('btn-csv');
+
+// Serial DOM refs
+const serialStatus = document.getElementById('serial-status');
+const serialStatusText = document.querySelector('.serial-status-text');
+const baudSelect = document.getElementById('baud-rate');
+const btnSerialConnect = document.getElementById('btn-serial-connect');
+const btnClearSerial = document.getElementById('btn-clear-serial');
+const serialCount = document.getElementById('serial-count');
+
+// ============================================================================
+// Serial port state
+// ============================================================================
+let serialPort = null;
+let serialReader = null;
+let serialSamples = [];
+let serialPartial = {};
+let serialBuffer = '';
+let serialStartTime = null;
+let serialRunning = false;
+const MAX_SERIAL_SAMPLES = 1000;
+const SERIAL_REFRESH_MS = 200;
+let serialRefreshTimer = null;
+
+// XY (rotation debug) state — collected in parallel with motor samples
+let serialXYSamples = [];
+let serialXYPartial = {};
+const MAX_XY_SAMPLES = 1000;
+let currentMode = 'time'; // 'time' | 'rotation'
+
+// ============================================================================
+// Download utilities
+// ============================================================================
+
+/** Serialize an in-page SVG to a standalone SVG string with computed styles inlined */
+function serializeStandaloneSVG(svgEl) {
+  const clone = svgEl.cloneNode(true);
+
+  // Walk every element and resolve CSS var() references in presentation attributes
+  function resolveElement(origEl, cloneEl) {
+    const cs = getComputedStyle(origEl);
+    const attrs = ['fill', 'stroke', 'font-family', 'color', 'opacity'];
+    for (const attr of attrs) {
+      const origVal = origEl.getAttribute(attr);
+      if (origVal && origVal.includes('var(')) {
+        cloneEl.setAttribute(attr, cs.getPropertyValue(attr));
+      }
+    }
+    const styleAttr = origEl.getAttribute('style');
+    if (styleAttr && styleAttr.includes('var(')) {
+      cloneEl.setAttribute('style', styleAttr.replace(/var\((--[\w-]+)\)/g, (_, name) =>
+        getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+      ));
+    }
+  }
+
+  resolveElement(svgEl, clone);
+
+  const origAll = svgEl.querySelectorAll('*');
+  const cloneAll = clone.querySelectorAll('*');
+  for (let i = 0; i < origAll.length; i++) {
+    resolveElement(origAll[i], cloneAll[i]);
+  }
+
+  let svgStr = new XMLSerializer().serializeToString(clone);
+  if (!svgStr.includes('xmlns')) {
+    svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' + svgStr;
+}
+
+/** Trigger a blob download */
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/** Download SVG directly */
+function downloadSVG(svgEl, filename) {
+  const svgStr = serializeStandaloneSVG(svgEl);
+  const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  downloadBlob(blob, filename);
+}
+
+/** Download PNG rendered from SVG at 2x resolution */
+function downloadPNG(svgEl, filename) {
+  const svgStr = serializeStandaloneSVG(svgEl);
+  const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+
+  const img = new Image();
+  img.onload = () => {
+    const viewBox = svgEl.getAttribute('viewBox');
+    const parts = viewBox ? viewBox.split(/\s+/) : [0, 0, 900, 260];
+    const w = parseFloat(parts[2]) || 900;
+    const h = parseFloat(parts[3]) || 260;
+    const scale = 2;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = w * scale;
+    canvas.height = h * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(scale, scale);
+
+    // Use computed surface-1 for background
+    const bg = getComputedStyle(document.documentElement).getPropertyValue('--surface-1').trim() || '#0d0d1a';
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0, w, h);
+    URL.revokeObjectURL(url);
+
+    canvas.toBlob((pngBlob) => {
+      if (pngBlob) downloadBlob(pngBlob, filename);
+    }, 'image/png');
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(url);
+    alert('图片生成失败，请重试。');
+  };
+  img.src = url;
+}
+
+/** Download parsed samples as CSV */
+function downloadCSV(samples, timesOverride) {
+  const header = ['Time(s)', ...KEYS, 'SpeedDiff'].join(',');
+  const rows = samples.map((s, i) => {
+    const t = timesOverride ? timesOverride[i].toFixed(1) : (i * 0.1).toFixed(1);
+    const diff = (s.LeftSpeed || 0) - (s.RightSpeed || 0);
+    const cells = [
+      t,
+      (s.LeftSpeed || 0).toFixed(4),
+      (s.Lefterror || 0).toFixed(4),
+      (s.LeftDuty || 0).toFixed(6),
+      (s.RightSpeed || 0).toFixed(4),
+      (s.Righterror || 0).toFixed(4),
+      (s.RightDuty || 0).toFixed(6),
+      diff.toFixed(4)
+    ];
+    return cells.join(',');
+  });
+  const csv = '﻿' + header + '\n' + rows.join('\n'); // BOM for Excel UTF-8
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  downloadBlob(blob, 'motor_data.csv');
+}
+
+/** Download XY samples as CSV */
+function downloadCSV_XY(samples, timesOverride) {
+  const header = ['Time(s)', 'yaw', 'speed_sub'].join(',');
+  const rows = samples.map((s, i) => {
+    const t = timesOverride ? timesOverride[i].toFixed(2) : (i * 0.1).toFixed(2);
+    const cells = [
+      t,
+      (s.yaw || 0).toFixed(4),
+      (s.speed_sub || 0).toFixed(4)
+    ];
+    return cells.join(',');
+  });
+  const csv = '﻿' + header + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  downloadBlob(blob, 'motor_xy_data.csv');
+}
+
+// ============================================================================
+// Serial port — data reading & real-time rendering
+// ============================================================================
+
+function updateSerialUI(connected) {
+  if (connected) {
+    serialStatus.classList.add('connected');
+    serialStatusText.textContent = '已连接';
+    btnSerialConnect.textContent = '断开串口';
+    btnSerialConnect.classList.add('connected');
+    btnClearSerial.style.display = '';
+    serialCount.style.display = '';
+    inputEl.readOnly = true;
+    inputEl.placeholder = '串口已连接，实时数据自动填充...';
+    btnEl.disabled = true;
+    btnEl.style.opacity = '0.5';
+    btnEl.title = '串口模式下自动渲染，无需手动点击';
+    btnExample.disabled = true;
+    btnExample.style.opacity = '0.5';
+    btnExample.title = '串口模式下不可用';
+    document.getElementById('mode-bar').style.display = '';
+  } else {
+    serialStatus.classList.remove('connected');
+    serialStatusText.textContent = '未连接';
+    btnSerialConnect.textContent = '连接串口';
+    btnSerialConnect.classList.remove('connected');
+    btnClearSerial.style.display = 'none';
+    serialCount.style.display = 'none';
+    inputEl.readOnly = false;
+    inputEl.placeholder = 'LeftSpeed:620.874634\nLefterror:-109.159973\nLeftDuty:0.358146\nRightSpeed:632.589233\nRighterror:-132.589233\nRightDuty:0.335515\n...';
+    btnEl.disabled = false;
+    btnEl.style.opacity = '';
+    btnEl.title = '';
+    btnExample.disabled = false;
+    btnExample.style.opacity = '';
+    btnExample.title = '';
+    document.getElementById('mode-bar').style.display = 'none';
+  }
+}
+
+async function connectSerial() {
+  if (!('serial' in navigator)) {
+    alert('当前浏览器不支持 Web Serial API。请使用 Chrome 或 Edge 浏览器打开此页面。');
+    return;
+  }
+
+  const baudRate = parseInt(baudSelect.value, 10);
+
+  try {
+    // Request port
+    serialPort = await navigator.serial.requestPort();
+    await serialPort.open({ baudRate });
+
+    // Reset state
+    serialSamples = [];
+    serialPartial = {};
+    serialBuffer = '';
+    serialStartTime = null;
+    serialXYSamples = [];
+    serialXYPartial = {};
+    serialRunning = true;
+
+    updateSerialUI(true);
+
+    // Start reading
+    const textDecoder = new TextDecoderStream();
+    const readableStreamClosed = serialPort.readable.pipeTo(textDecoder.writable);
+    serialReader = textDecoder.readable.getReader();
+
+    // Start refresh timer
+    serialRefreshTimer = setInterval(serialRender, SERIAL_REFRESH_MS);
+
+    // Read loop (non-blocking)
+    readSerialLoop(serialReader).catch(err => {
+      if (serialRunning) {
+        console.error('串口读取错误:', err);
+        disconnectSerial();
+      }
+    });
+
+    // Watch for port disconnect
+    serialPort.addEventListener('disconnect', () => {
+      if (serialRunning) disconnectSerial();
+    });
+
+  } catch (err) {
+    if (err.name === 'NotFoundError') {
+      // User cancelled port selection — ignore
+    } else {
+      alert('串口连接失败: ' + err.message);
+    }
+    console.error('连接串口失败:', err);
+  }
+}
+
+async function disconnectSerial() {
+  serialRunning = false;
+
+  if (serialRefreshTimer) {
+    clearInterval(serialRefreshTimer);
+    serialRefreshTimer = null;
+  }
+
+  try {
+    if (serialReader) {
+      await serialReader.cancel();
+      serialReader = null;
+    }
+  } catch (_) { /* ignore */ }
+
+  try {
+    if (serialPort) {
+      await serialPort.close();
+      serialPort = null;
+    }
+  } catch (_) { /* ignore */ }
+
+  updateSerialUI(false);
+}
+
+async function readSerialLoop(reader) {
+  while (serialRunning) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    serialBuffer += value;
+
+    // Split on newlines; keep incomplete last piece in buffer
+    const lines = serialBuffer.split(/\r?\n/);
+    serialBuffer = lines.pop(); // incomplete line stays in buffer
+
+    for (const line of lines) {
+      processLine(line);
+    }
+  }
+}
+
+function processLine(line) {
+  line = line.trim();
+  if (!line) return;
+
+  // Support both ':' and '=' separators; handle scientific notation
+  const match = line.match(/([A-Za-z_]+)[:=](-?[\d.]+(?:[eE][+-]?\d+)?)/);
+  if (!match) return;
+
+  const key = match[1];
+  const val = parseFloat(match[2]);
+
+  // Route yaw / speed_sub to XY collection (always, regardless of mode)
+  if (key === 'yaw' || key === 'speed_sub') {
+    if (key in serialXYPartial) {
+      commitXYSample();
+    }
+    serialXYPartial[key] = val;
+    if (('yaw' in serialXYPartial) && ('speed_sub' in serialXYPartial)) {
+      commitXYSample();
+    }
+    return;
+  }
+
+  // Existing motor-key routing
+  if (key in serialPartial) {
+    commitSample();
+  }
+
+  serialPartial[key] = val;
+
+  if (KEYS.every(k => k in serialPartial)) {
+    commitSample();
+  }
+}
+
+function commitSample() {
+  const keys = Object.keys(serialPartial);
+  if (keys.length === 0) return;
+
+  const sample = { ts: performance.now() };
+  for (const k of KEYS) {
+    sample[k] = serialPartial[k];
+  }
+
+  serialSamples.push(sample);
+  if (serialSamples.length > MAX_SERIAL_SAMPLES) {
+    serialSamples.shift();
+  }
+  if (serialStartTime === null) {
+    serialStartTime = sample.ts;
+  }
+  serialPartial = {};
+}
+
+function commitXYSample() {
+  const keys = Object.keys(serialXYPartial);
+  if (keys.length === 0) return;
+
+  const sample = { ts: performance.now() };
+  sample.yaw = serialXYPartial.yaw;
+  sample.speed_sub = serialXYPartial.speed_sub;
+
+  serialXYSamples.push(sample);
+  if (serialXYSamples.length > MAX_XY_SAMPLES) {
+    serialXYSamples.shift();
+  }
+  serialXYPartial = {};
+}
+
+function serialRender() {
+  if (!serialRunning) return;
+
+  if (currentMode === 'rotation') {
+    // Rotation debug mode — use XY samples
+    const n = serialXYSamples.length;
+    serialCount.textContent = `已采集 ${n} 组 (XY)`;
+
+    if (n < 2) return;
+
+    // Update textarea with a snapshot of recent XY data
+    const recentStart = Math.max(0, n - 60);
+    const snapshot = serialXYSamples.slice(recentStart).map(s => {
+      return `yaw:${(s.yaw || 0).toFixed(6)}\nspeed_sub:${(s.speed_sub || 0).toFixed(6)}`;
+    }).join('\n');
+    inputEl.value = snapshot;
+
+    renderRotationMode(serialXYSamples);
+  } else {
+    // Time-domain mode — use motor samples (original behavior)
+    const n = serialSamples.length;
+    serialCount.textContent = `已采集 ${n} 组`;
+
+    if (n < 2) return;
+
+    // Update textarea with a snapshot of recent data (max 60 lines)
+    const recentStart = Math.max(0, n - 60);
+    const snapshot = serialSamples.slice(recentStart).map(s => {
+      return `LeftSpeed:${(s.LeftSpeed || 0).toFixed(6)}\nLefterror:${(s.Lefterror || 0).toFixed(6)}\nLeftDuty:${(s.LeftDuty || 0).toFixed(6)}\nRightSpeed:${(s.RightSpeed || 0).toFixed(6)}\nRighterror:${(s.Righterror || 0).toFixed(6)}\nRightDuty:${(s.RightDuty || 0).toFixed(6)}`;
+    }).join('\n');
+    inputEl.value = snapshot;
+
+    renderFromSerialSamples(serialSamples);
+  }
+}
+
+function renderFromSerialSamples(samples) {
+  if (samples.length < 2) return;
+
+  // Build relative time array (seconds from first sample)
+  const times = samples.map(s => (s.ts - serialStartTime) / 1000);
+  const duration = times[times.length - 1];
+  const n = samples.length;
+
+  // Stats
+  statsEl.innerHTML = `<span>共 <strong>${n}</strong> 组数据</span><span>时长 <strong>${duration.toFixed(1)}s</strong></span><span>频率 ~<strong>${(n / Math.max(duration, 0.001)).toFixed(0)} Hz</strong></span>`;
+
+  errorEl.style.display = 'none';
+  emptyState.style.display = 'none';
+
+  // Pre-compute derived fields
+  for (const s of samples) {
+    s.SpeedDiff = (s.LeftSpeed || 0) - (s.RightSpeed || 0);
+  }
+
+  // Build charts with custom times
+  const chartMetas = chartDefs.map(def => {
+    const meta = buildChartSVG(samples, def.seriesA, def.seriesB, def.titleA, def.titleB, def.yLabel, def.decimals, times);
+    const result = { ...meta, ...def };
+    if (def.yLabel === 'SpeedDiff' && meta.valsA.length > 1) {
+      const vals = meta.valsA;
+      const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+      result.stddev = Math.sqrt(vals.reduce((s, v) => s + (v - mean) ** 2, 0) / vals.length);
+    }
+    return result;
+  });
+
+  // Render chart cards
+  chartsArea.innerHTML = chartMetas.map((m, ci) => `
+    <div class="chart-card">
+      <div class="chart-header">
+        <span class="chart-title">${m.yLabel}${m.stddev != null ? ` <span style="font-size:0.78rem;font-weight:400;color:var(--text-muted);">标准差: ${m.stddev.toFixed(4)}</span>` : ''}</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="legend">
+            <div class="legend-item"><span class="legend-swatch left"></span>${m.titleA}</div>
+            ${m.titleB ? `<div class="legend-item"><span class="legend-swatch right"></span>${m.titleB}</div>` : ''}
+          </div>
+          <div class="download-wrap">
+            <button class="btn-download" data-chart="${ci}">下载 ▼</button>
+            <div class="download-menu" id="download-menu-${ci}">
+              <button data-action="png" data-chart="${ci}">PNG 图片</button>
+              <button data-action="svg" data-chart="${ci}">SVG 矢量图</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper" id="wrapper-${ci}">
+        ${m.svg}
+        <div class="tooltip" id="tooltip-${ci}"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // Attach interaction (same as render())
+  chartMetas.forEach((m, ci) => {
+    const wrapper = document.getElementById(`wrapper-${ci}`);
+    if (!wrapper) return;
+    const svgEl = wrapper.querySelector('svg');
+    if (!svgEl) return;
+    const tooltip = document.getElementById(`tooltip-${ci}`);
+    const crosshair = svgEl.querySelector('.crosshair');
+    const hitArea = svgEl.querySelector('.hit-area');
+
+    if (!hitArea) return;
+
+    function hideTooltip() {
+      tooltip.classList.remove('active');
+      crosshair.setAttribute('opacity', '0');
+    }
+
+    hitArea.addEventListener('mousemove', (e) => {
+      const rect = svgEl.getBoundingClientRect();
+      const scaleX = 900 / rect.width;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      for (let i = 0; i < m.times.length; i++) {
+        const sx = m.xScale(m.times[i]);
+        const d = Math.abs(mouseX - sx);
+        if (d < bestDist) { bestDist = d; bestIdx = i; }
+      }
+
+      const cx = m.xScale(m.times[bestIdx]);
+      crosshair.setAttribute('x1', cx);
+      crosshair.setAttribute('x2', cx);
+      crosshair.setAttribute('opacity', '1');
+
+      const ttX = (cx / 900) * rect.width;
+      const side = ttX > rect.width * 0.6 ? 'right' : 'left';
+
+      const rightRow = m.titleB ? `<div class="tt-row"><span class="tt-key"><span class="tt-line right"></span>${m.titleB}</span><span class="tt-val">${formatNum(m.valsB[bestIdx], m.decimals)}</span></div>` : '';
+      tooltip.innerHTML = `
+        <div class="tt-time">t = ${m.times[bestIdx].toFixed(2)}s</div>
+        <div class="tt-row"><span class="tt-key"><span class="tt-line left"></span>${m.titleA}</span><span class="tt-val">${formatNum(m.valsA[bestIdx], m.decimals)}</span></div>
+        ${rightRow}
+      `;
+      tooltip.classList.add('active');
+
+      const ttRect = tooltip.getBoundingClientRect();
+      let left = side === 'right' ? ttX - ttRect.width - 12 : ttX + 12;
+      left = Math.max(4, Math.min(left, rect.width - ttRect.width - 4));
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = (m.MARGIN.top + 4) + 'px';
+    });
+
+    hitArea.addEventListener('mouseleave', hideTooltip);
+    hitArea.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      hitArea.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY }));
+    });
+    hitArea.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      hitArea.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY }));
+    });
+    hitArea.addEventListener('touchend', hideTooltip);
+  });
+
+  // Build data table
+  buildTableSerialSamples(samples, times);
+
+  tableToggle.style.display = 'inline-flex';
+  btnCsv.style.display = 'inline-flex';
+}
+
+function buildTableSerialSamples(samples, times) {
+  tableWrap.innerHTML = '';
+
+  const table = document.createElement('table');
+  let html = `<thead><tr><th>时间</th>`;
+  for (const k of KEYS) {
+    html += `<th>${k}</th>`;
+  }
+  html += `<th>SpeedDiff</th>`;
+  html += `</tr></thead><tbody>`;
+
+  for (let i = 0; i < samples.length; i++) {
+    const s = samples[i];
+    const diff = (s.LeftSpeed || 0) - (s.RightSpeed || 0);
+    html += `<tr><td>${times[i].toFixed(2)}s</td>`;
+    html += `<td>${(s.LeftSpeed || 0).toFixed(4)}</td>`;
+    html += `<td>${(s.Lefterror || 0).toFixed(4)}</td>`;
+    html += `<td>${(s.LeftDuty || 0).toFixed(6)}</td>`;
+    html += `<td>${(s.RightSpeed || 0).toFixed(4)}</td>`;
+    html += `<td>${(s.Righterror || 0).toFixed(4)}</td>`;
+    html += `<td>${(s.RightDuty || 0).toFixed(6)}</td>`;
+    html += `<td>${diff.toFixed(4)}</td>`;
+    html += `</tr>`;
+  }
+  html += `</tbody>`;
+  table.innerHTML = html;
+  tableWrap.appendChild(table);
+}
+
+const chartDefs = [
+  { seriesA: 'LeftSpeed',  seriesB: 'RightSpeed',  titleA: '左轮速度', titleB: '右轮速度', yLabel: 'Speed', decimals: 4 },
+  { seriesA: 'Lefterror',  seriesB: 'Righterror',  titleA: '左轮误差', titleB: '右轮误差', yLabel: 'Error', decimals: 4 },
+  { seriesA: 'LeftDuty',   seriesB: 'RightDuty',   titleA: '左轮占空比', titleB: '右轮占空比', yLabel: 'Duty', decimals: 4 },
+  { seriesA: 'SpeedDiff',  seriesB: null,          titleA: '速度差值',   titleB: null,           yLabel: 'SpeedDiff', decimals: 4 },
+];
+
+// ============================================================================
+// XY trajectory chart (for rotation debug mode)
+// X axis = data values (xKey), Y axis = data values (yKey)
+// ============================================================================
+function buildXYChartSVG(samples, xKey, yKey, xLabel, yLabel, decimals) {
+  const MARGIN = { top: 8, right: 36, bottom: 32, left: 56 };
+  const WIDTH = 900;
+  const HEIGHT = 300;
+  const PW = WIDTH - MARGIN.left - MARGIN.right;
+  const PH = HEIGHT - MARGIN.top - MARGIN.bottom;
+
+  const xVals = samples.map(s => s[xKey] || 0);
+  const yVals = samples.map(s => s[yKey] || 0);
+
+  // X scale
+  let xMin = Math.min(...xVals);
+  let xMax = Math.max(...xVals);
+  const xPad = (xMax - xMin) * 0.12 || Math.max(Math.abs(xMin) * 0.1, 1);
+  xMin -= xPad;
+  xMax += xPad;
+
+  // Y scale
+  let yMin = Math.min(...yVals);
+  let yMax = Math.max(...yVals);
+  const yPad = (yMax - yMin) * 0.12 || Math.max(Math.abs(yMin) * 0.1, 1);
+  yMin -= yPad;
+  yMax += yPad;
+
+  const xTicks = niceTicks(xMin, xMax, 5);
+  const yTicks = niceTicks(yMin, yMax, 5);
+  const xTickMin = xTicks[0];
+  const xTickMax = xTicks[xTicks.length - 1];
+  const yTickMin = yTicks[0];
+  const yTickMax = yTicks[yTicks.length - 1];
+
+  const xScale = v => MARGIN.left + ((v - xTickMin) / (xTickMax - xTickMin)) * PW;
+  const yScale = v => MARGIN.top + (1 - (v - yTickMin) / (yTickMax - yTickMin)) * PH;
+
+  // Polyline connecting points in arrival order
+  const pts = samples.map((s, i) => `${xScale(s[xKey] || 0)},${yScale(s[yKey] || 0)}`).join(' ');
+
+  const svg = [];
+  const S = (s) => svg.push(s);
+
+  S(`<svg class="viz" viewBox="0 0 ${WIDTH} ${HEIGHT}" xmlns="http://www.w3.org/2000/svg">`);
+  S(`<rect width="100%" height="100%" fill="var(--surface-1)"/>`);
+
+  // Y gridlines
+  S(`<g class="gridlines">`);
+  for (const t of yTicks) {
+    const y = yScale(t);
+    S(`<line x1="${MARGIN.left}" x2="${WIDTH - MARGIN.right}" y1="${y}" y2="${y}" stroke="var(--gridline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`);
+  }
+  S(`</g>`);
+
+  // X gridlines
+  for (const t of xTicks) {
+    const x = xScale(t);
+    S(`<line x1="${x}" x2="${x}" y1="${MARGIN.top}" y2="${MARGIN.top + PH}" stroke="var(--gridline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`);
+  }
+
+  // Axes
+  S(`<line x1="${MARGIN.left}" x2="${WIDTH - MARGIN.right}" y1="${yScale(yTickMin)}" y2="${yScale(yTickMin)}" stroke="var(--baseline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`);
+  S(`<line x1="${xScale(xTickMin)}" x2="${xScale(xTickMin)}" y1="${MARGIN.top}" y2="${MARGIN.top + PH}" stroke="var(--baseline)" stroke-width="1" vector-effect="non-scaling-stroke"/>`);
+
+  // Y-axis ticks
+  S(`<g class="y-ticks" fill="var(--text-muted)" font-size="11" font-family="var(--font-mono)" text-anchor="end">`);
+  for (const t of yTicks) {
+    S(`<text x="${MARGIN.left - 8}" y="${yScale(t) + 4}">${formatNum(t, decimals)}</text>`);
+  }
+  S(`</g>`);
+
+  // X-axis ticks
+  S(`<g class="x-ticks" fill="var(--text-muted)" font-size="11" font-family="var(--font-mono)" text-anchor="middle">`);
+  for (const t of xTicks) {
+    S(`<text x="${xScale(t)}" y="${MARGIN.top + PH + 18}">${formatNum(t, decimals)}</text>`);
+  }
+  S(`</g>`);
+
+  // Axis labels
+  S(`<text x="${MARGIN.left + PW / 2}" y="${HEIGHT - 4}" fill="var(--text-secondary)" font-size="12" font-family="var(--font-body)" text-anchor="middle">${xLabel}</text>`);
+  S(`<text x="12" y="${MARGIN.top + PH / 2}" fill="var(--text-secondary)" font-size="12" font-family="var(--font-body)" text-anchor="middle" transform="rotate(-90, 12, ${MARGIN.top + PH / 2})">${yLabel}</text>`);
+
+  // Polyline
+  S(`<polyline points="${pts}" fill="none" stroke="var(--series-left)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" class="line-a"/>`);
+
+  // End marker
+  if (samples.length > 0) {
+    const last = samples.length - 1;
+    const cx = xScale(samples[last][xKey] || 0);
+    const cy = yScale(samples[last][yKey] || 0);
+    S(`<circle cx="${cx}" cy="${cy}" r="5" fill="var(--series-left)" stroke="var(--surface-1)" stroke-width="2" class="marker-left"/>`);
+  }
+
+  // Crosshair (vertical + horizontal for XY chart)
+  S(`<line class="crosshair" x1="0" y1="${MARGIN.top}" x2="0" y2="${MARGIN.top + PH}" stroke="var(--baseline)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>`);
+  S(`<line class="crosshair-h" x1="${MARGIN.left}" y1="0" x2="${WIDTH - MARGIN.right}" y2="0" stroke="var(--baseline)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>`);
+
+  // Hit area
+  S(`<rect class="hit-area" x="${MARGIN.left}" y="${MARGIN.top}" width="${PW}" height="${PH}" fill="transparent" pointer-events="all"/>`);
+
+  S(`</svg>`);
+
+  return {
+    svg: svg.join('\n'),
+    xVals,
+    yVals,
+    xScale,
+    yScale,
+    MARGIN,
+    PW,
+    PH,
+    xTickMin,
+    xTickMax,
+    yTickMin,
+    yTickMax
+  };
+}
+
+// ============================================================================
+// Rotation debug mode rendering — 3 charts: XY trajectory + yaw time + speed_sub time
+// ============================================================================
+function renderRotationMode(samples) {
+  if (samples.length < 2) return;
+
+  // Build relative time array (seconds from first XY sample)
+  const xyStartTime = samples[0].ts;
+  const times = samples.map(s => (s.ts - xyStartTime) / 1000);
+  const duration = times[times.length - 1];
+  const n = samples.length;
+
+  // Stats
+  statsEl.innerHTML = `<span>共 <strong>${n}</strong> 组 XY 数据</span><span>时长 <strong>${duration.toFixed(1)}s</strong></span><span>频率 ~<strong>${(n / Math.max(duration, 0.001)).toFixed(0)} Hz</strong></span>`;
+
+  errorEl.style.display = 'none';
+  emptyState.style.display = 'none';
+
+  // Chart 1: XY trajectory (yaw vs speed_sub)
+  const xyMeta = buildXYChartSVG(samples, 'yaw', 'speed_sub', 'yaw', 'speed_sub', 4);
+
+  // Chart 2: yaw time series
+  const yawMeta = buildChartSVG(samples, 'yaw', null, 'yaw', null, 'yaw_t', 4, times);
+
+  // Chart 3: speed_sub time series
+  const subMeta = buildChartSVG(samples, 'speed_sub', null, 'speed_sub', null, 'speed_sub_t', 4, times);
+
+  // Compute stddev for yaw
+  let yawStddev = null;
+  if (yawMeta.valsA.length > 1) {
+    const vals = yawMeta.valsA;
+    const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+    yawStddev = Math.sqrt(vals.reduce((s, v) => s + (v - mean) ** 2, 0) / vals.length);
+  }
+
+  // Compute stddev for speed_sub
+  let subStddev = null;
+  if (subMeta.valsA.length > 1) {
+    const vals = subMeta.valsA;
+    const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+    subStddev = Math.sqrt(vals.reduce((s, v) => s + (v - mean) ** 2, 0) / vals.length);
+  }
+
+  const chartCards = [
+    { meta: xyMeta,  title: 'XY 轨迹',    subtitle: '',                stddev: null,     chartIdx: 0 },
+    { meta: yawMeta, title: 'yaw',         subtitle: 'yaw 时域',        stddev: yawStddev, chartIdx: 1 },
+    { meta: subMeta, title: 'speed_sub',   subtitle: 'speed_sub 时域',  stddev: subStddev, chartIdx: 2 },
+  ];
+
+  // Render chart cards
+  chartsArea.innerHTML = chartCards.map((c, ci) => `
+    <div class="chart-card">
+      <div class="chart-header">
+        <span class="chart-title">${c.subtitle || c.title}${c.stddev != null ? ` <span style="font-size:0.78rem;font-weight:400;color:var(--text-muted);">标准差: ${c.stddev.toFixed(4)}</span>` : ''}</span>
+        <div class="download-wrap">
+          <button class="btn-download" data-chart="${ci}">下载 ▼</button>
+          <div class="download-menu" id="download-menu-${ci}">
+            <button data-action="png" data-chart="${ci}">PNG 图片</button>
+            <button data-action="svg" data-chart="${ci}">SVG 矢量图</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper" id="wrapper-${ci}">
+        ${c.meta.svg}
+        <div class="tooltip" id="tooltip-${ci}"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // Attach interaction for XY trajectory chart (ci=0)
+  attachXYChartInteraction(chartCards[0].meta, 0, 'yaw', 'speed_sub', samples, times);
+  // Attach interaction for yaw time chart (ci=1) — use standard time-series interaction
+  attachTimeChartInteraction(chartCards[1].meta, 1, samples, times);
+  // Attach interaction for speed_sub time chart (ci=2)
+  attachTimeChartInteraction(chartCards[2].meta, 2, samples, times);
+
+  // Build data table for XY data
+  buildTableXYSamples(samples, times);
+
+  tableToggle.style.display = 'inline-flex';
+  btnCsv.style.display = 'inline-flex';
+}
+
+// Attach tooltip interaction for XY trajectory chart
+function attachXYChartInteraction(meta, ci, xKey, yKey, samples, times) {
+  const wrapper = document.getElementById(`wrapper-${ci}`);
+  if (!wrapper) return;
+  const svgEl = wrapper.querySelector('svg');
+  if (!svgEl) return;
+  const tooltip = document.getElementById(`tooltip-${ci}`);
+  const crosshair = svgEl.querySelector('.crosshair');
+  const crosshairH = svgEl.querySelector('.crosshair-h');
+  const hitArea = svgEl.querySelector('.hit-area');
+  if (!hitArea) return;
+
+  function hideTooltip() {
+    tooltip.classList.remove('active');
+    if (crosshair) crosshair.setAttribute('opacity', '0');
+    if (crosshairH) crosshairH.setAttribute('opacity', '0');
+  }
+
+  hitArea.addEventListener('mousemove', (e) => {
+    const rect = svgEl.getBoundingClientRect();
+    const scaleX = 900 / rect.width;
+    const scaleY = 300 / rect.height;
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
+
+    // Find nearest data point (by distance in SVG coordinates)
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < samples.length; i++) {
+      const sx = meta.xScale(samples[i][xKey] || 0);
+      const sy = meta.yScale(samples[i][yKey] || 0);
+      const d = Math.hypot(mouseX - sx, mouseY - sy);
+      if (d < bestDist) { bestDist = d; bestIdx = i; }
+    }
+
+    const cx = meta.xScale(samples[bestIdx][xKey] || 0);
+    const cy = meta.yScale(samples[bestIdx][yKey] || 0);
+
+    if (crosshair) { crosshair.setAttribute('x1', cx); crosshair.setAttribute('x2', cx); crosshair.setAttribute('opacity', '1'); }
+    if (crosshairH) { crosshairH.setAttribute('y1', cy); crosshairH.setAttribute('y2', cy); crosshairH.setAttribute('opacity', '1'); }
+
+    const ttX = (cx / 900) * rect.width;
+    const side = ttX > rect.width * 0.6 ? 'right' : 'left';
+
+    tooltip.innerHTML = `
+      <div class="tt-time">#${bestIdx + 1}  t = ${times[bestIdx].toFixed(2)}s</div>
+      <div class="tt-row"><span class="tt-key">${xKey}</span><span class="tt-val">${formatNum(samples[bestIdx][xKey] || 0, 4)}</span></div>
+      <div class="tt-row"><span class="tt-key">${yKey}</span><span class="tt-val">${formatNum(samples[bestIdx][yKey] || 0, 4)}</span></div>
+    `;
+    tooltip.classList.add('active');
+
+    const ttRect = tooltip.getBoundingClientRect();
+    let left = side === 'right' ? ttX - ttRect.width - 12 : ttX + 12;
+    left = Math.max(4, Math.min(left, rect.width - ttRect.width - 4));
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = (meta.MARGIN.top + 4) + 'px';
+  });
+
+  hitArea.addEventListener('mouseleave', hideTooltip);
+  hitArea.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    hitArea.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY }));
+  });
+  hitArea.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    hitArea.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY }));
+  });
+  hitArea.addEventListener('touchend', hideTooltip);
+}
+
+// Attach tooltip interaction for time-series charts in rotation mode
+function attachTimeChartInteraction(meta, ci, samples, times) {
+  const wrapper = document.getElementById(`wrapper-${ci}`);
+  if (!wrapper) return;
+  const svgEl = wrapper.querySelector('svg');
+  if (!svgEl) return;
+  const tooltip = document.getElementById(`tooltip-${ci}`);
+  const crosshair = svgEl.querySelector('.crosshair');
+  const hitArea = svgEl.querySelector('.hit-area');
+  if (!hitArea) return;
+
+  function hideTooltip() {
+    tooltip.classList.remove('active');
+    if (crosshair) crosshair.setAttribute('opacity', '0');
+  }
+
+  hitArea.addEventListener('mousemove', (e) => {
+    const rect = svgEl.getBoundingClientRect();
+    const scaleX = 900 / rect.width;
+    const mouseX = (e.clientX - rect.left) * scaleX;
+
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < times.length; i++) {
+      const sx = meta.xScale(times[i]);
+      const d = Math.abs(mouseX - sx);
+      if (d < bestDist) { bestDist = d; bestIdx = i; }
+    }
+
+    const cx = meta.xScale(times[bestIdx]);
+    if (crosshair) { crosshair.setAttribute('x1', cx); crosshair.setAttribute('x2', cx); crosshair.setAttribute('opacity', '1'); }
+
+    const ttX = (cx / 900) * rect.width;
+    const side = ttX > rect.width * 0.6 ? 'right' : 'left';
+
+    tooltip.innerHTML = `
+      <div class="tt-time">t = ${times[bestIdx].toFixed(2)}s</div>
+      <div class="tt-row"><span class="tt-key"><span class="tt-line left"></span>${formatNum(meta.valsA[bestIdx], 4)}</span></div>
+    `;
+    tooltip.classList.add('active');
+
+    const ttRect = tooltip.getBoundingClientRect();
+    let left = side === 'right' ? ttX - ttRect.width - 12 : ttX + 12;
+    left = Math.max(4, Math.min(left, rect.width - ttRect.width - 4));
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = (meta.MARGIN.top + 4) + 'px';
+  });
+
+  hitArea.addEventListener('mouseleave', hideTooltip);
+  hitArea.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    hitArea.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY }));
+  });
+  hitArea.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    hitArea.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY }));
+  });
+  hitArea.addEventListener('touchend', hideTooltip);
+}
+
+// Build data table for XY samples
+function buildTableXYSamples(samples, times) {
+  tableWrap.innerHTML = '';
+
+  const table = document.createElement('table');
+  let html = `<thead><tr><th>#</th><th>时间</th><th>yaw</th><th>speed_sub</th></tr></thead><tbody>`;
+
+  for (let i = 0; i < samples.length; i++) {
+    const s = samples[i];
+    html += `<tr><td>${i + 1}</td><td>${times[i].toFixed(2)}s</td>`;
+    html += `<td>${(s.yaw || 0).toFixed(4)}</td>`;
+    html += `<td>${(s.speed_sub || 0).toFixed(4)}</td>`;
+    html += `</tr>`;
+  }
+  html += `</tbody>`;
+  table.innerHTML = html;
+  tableWrap.appendChild(table);
+}
+
+function render() {
+  const raw = inputEl.value.trim();
+  errorEl.style.display = 'none';
+  errorEl.textContent = '';
+
+  if (!raw) {
+    chartsArea.innerHTML = '';
+    emptyState.style.display = 'block';
+    statsEl.innerHTML = '';
+    tableToggle.style.display = 'none';
+    btnCsv.style.display = 'none';
+    tableWrap.innerHTML = '';
+    tableWrap.classList.remove('open');
+    tableArrow.textContent = '▸';
+    return;
+  }
+
+  const samples = parseData(raw);
+
+  if (samples.length === 0) {
+    errorEl.textContent = '⚠ 未能解析到有效数据。请检查格式：每行应为 Key:Value 形式，包含全部 6 个指标。';
+    errorEl.style.display = 'block';
+    chartsArea.innerHTML = '';
+    emptyState.style.display = 'block';
+    statsEl.innerHTML = '';
+    tableToggle.style.display = 'none';
+    btnCsv.style.display = 'none';
+    tableWrap.innerHTML = '';
+    tableWrap.classList.remove('open');
+    return;
+  }
+
+  if (samples.length < 2) {
+    errorEl.textContent = '⚠ 至少需要 2 组数据才能绘制折线图，当前仅有 ' + samples.length + ' 组。';
+    errorEl.style.display = 'block';
+    chartsArea.innerHTML = '';
+    emptyState.style.display = 'block';
+    statsEl.innerHTML = '';
+    tableToggle.style.display = 'none';
+    btnCsv.style.display = 'none';
+    return;
+  }
+
+  // Stats
+  const duration = ((samples.length - 1) * 0.1).toFixed(1);
+  statsEl.innerHTML = `<span>共 <strong>${samples.length}</strong> 组数据</span><span>时长 <strong>${duration}s</strong></span><span>间隔 <strong>0.1s</strong></span>`;
+
+  emptyState.style.display = 'none';
+
+  // Pre-compute derived fields
+  for (const s of samples) {
+    s.SpeedDiff = (s.LeftSpeed || 0) - (s.RightSpeed || 0);
+  }
+
+  // Build charts
+  const chartMetas = chartDefs.map(def => {
+    const meta = buildChartSVG(samples, def.seriesA, def.seriesB, def.titleA, def.titleB, def.yLabel, def.decimals);
+    const result = { ...meta, ...def };
+    if (def.yLabel === 'SpeedDiff' && meta.valsA.length > 1) {
+      const vals = meta.valsA;
+      const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+      result.stddev = Math.sqrt(vals.reduce((s, v) => s + (v - mean) ** 2, 0) / vals.length);
+    }
+    return result;
+  });
+
+  // Render chart cards
+  chartsArea.innerHTML = chartMetas.map((m, ci) => `
+    <div class="chart-card">
+      <div class="chart-header">
+        <span class="chart-title">${m.yLabel}${m.stddev != null ? ` <span style="font-size:0.78rem;font-weight:400;color:var(--text-muted);">标准差: ${m.stddev.toFixed(4)}</span>` : ''}</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="legend">
+            <div class="legend-item"><span class="legend-swatch left"></span>${m.titleA}</div>
+            ${m.titleB ? `<div class="legend-item"><span class="legend-swatch right"></span>${m.titleB}</div>` : ''}
+          </div>
+          <div class="download-wrap">
+            <button class="btn-download" data-chart="${ci}">下载 ▼</button>
+            <div class="download-menu" id="download-menu-${ci}">
+              <button data-action="png" data-chart="${ci}">PNG 图片</button>
+              <button data-action="svg" data-chart="${ci}">SVG 矢量图</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper" id="wrapper-${ci}">
+        ${m.svg}
+        <div class="tooltip" id="tooltip-${ci}"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // Attach interaction
+  chartMetas.forEach((m, ci) => {
+    const wrapper = document.getElementById(`wrapper-${ci}`);
+    const svgEl = wrapper.querySelector('svg');
+    const tooltip = document.getElementById(`tooltip-${ci}`);
+    const crosshair = svgEl.querySelector('.crosshair');
+    const hitArea = svgEl.querySelector('.hit-area');
+
+    function hideTooltip() {
+      tooltip.classList.remove('active');
+      crosshair.setAttribute('opacity', '0');
+    }
+
+    hitArea.addEventListener('mousemove', (e) => {
+      const rect = svgEl.getBoundingClientRect();
+      const scaleX = 900 / rect.width;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+
+      // Find nearest data index
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      for (let i = 0; i < m.times.length; i++) {
+        const sx = m.xScale(m.times[i]);
+        const d = Math.abs(mouseX - sx);
+        if (d < bestDist) { bestDist = d; bestIdx = i; }
+      }
+
+      const cx = m.xScale(m.times[bestIdx]);
+      crosshair.setAttribute('x1', cx);
+      crosshair.setAttribute('x2', cx);
+      crosshair.setAttribute('opacity', '1');
+
+      const ttX = (cx / 900) * rect.width;
+      const side = ttX > rect.width * 0.6 ? 'right' : 'left';
+
+      const rightRow2 = m.titleB ? `<div class="tt-row"><span class="tt-key"><span class="tt-line right"></span>${m.titleB}</span><span class="tt-val">${formatNum(m.valsB[bestIdx], m.decimals)}</span></div>` : '';
+      tooltip.innerHTML = `
+        <div class="tt-time">t = ${m.times[bestIdx].toFixed(1)}s</div>
+        <div class="tt-row"><span class="tt-key"><span class="tt-line left"></span>${m.titleA}</span><span class="tt-val">${formatNum(m.valsA[bestIdx], m.decimals)}</span></div>
+        ${rightRow2}
+      `;
+      tooltip.classList.add('active');
+
+      const ttRect = tooltip.getBoundingClientRect();
+      let left = side === 'right' ? ttX - ttRect.width - 12 : ttX + 12;
+      left = Math.max(4, Math.min(left, rect.width - ttRect.width - 4));
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = (m.MARGIN.top + 4) + 'px';
+    });
+
+    hitArea.addEventListener('mouseleave', hideTooltip);
+    hitArea.addEventListener('touchstart', (e) => {
+      // Simulate mousemove for touch
+      const touch = e.touches[0];
+      hitArea.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    });
+    hitArea.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      hitArea.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      }));
+    });
+    hitArea.addEventListener('touchend', hideTooltip);
+  });
+
+  // Build data table
+  buildTable(samples);
+
+  tableToggle.style.display = 'inline-flex';
+  btnCsv.style.display = 'inline-flex';
+}
+
+function buildTable(samples) {
+  tableWrap.innerHTML = '';
+
+  const table = document.createElement('table');
+  let html = `<thead><tr><th>时间</th>`;
+  for (const k of KEYS) {
+    html += `<th>${k}</th>`;
+  }
+  html += `<th>SpeedDiff</th>`;
+  html += `</tr></thead><tbody>`;
+
+  for (let i = 0; i < samples.length; i++) {
+    const s = samples[i];
+    const diff = (s.LeftSpeed || 0) - (s.RightSpeed || 0);
+    html += `<tr><td>${(i * 0.1).toFixed(1)}s</td>`;
+    html += `<td>${s.LeftSpeed.toFixed(4)}</td>`;
+    html += `<td>${s.Lefterror.toFixed(4)}</td>`;
+    html += `<td>${s.LeftDuty.toFixed(6)}</td>`;
+    html += `<td>${s.RightSpeed.toFixed(4)}</td>`;
+    html += `<td>${s.Righterror.toFixed(4)}</td>`;
+    html += `<td>${s.RightDuty.toFixed(6)}</td>`;
+    html += `<td>${diff.toFixed(4)}</td>`;
+    html += `</tr>`;
+  }
+  html += `</tbody>`;
+  table.innerHTML = html;
+  tableWrap.appendChild(table);
+}
+
+// Toggle table
+tableToggle.addEventListener('click', () => {
+  const open = tableWrap.classList.toggle('open');
+  tableArrow.textContent = open ? '▾' : '▸';
+});
+
+// Button + keyboard shortcut
+btnEl.addEventListener('click', render);
+btnExample.addEventListener('click', () => {
+  inputEl.value = EXAMPLE_DATA;
+  render();
+  inputEl.focus();
+});
+inputEl.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key === 'Enter') render();
+});
+
+// ---- Download: chart PNG / SVG ----
+// Event delegation for download dropdowns
+document.addEventListener('click', (e) => {
+  // Toggle download menu
+  const btn = e.target.closest('.btn-download');
+  if (btn) {
+    e.stopPropagation();
+    const ci = btn.dataset.chart;
+    const menu = document.getElementById(`download-menu-${ci}`);
+    const wasOpen = menu.classList.contains('open');
+    // Close all menus first
+    document.querySelectorAll('.download-menu.open').forEach(m => m.classList.remove('open'));
+    if (!wasOpen) menu.classList.add('open');
+    return;
+  }
+
+  // Download action (PNG / SVG)
+  const actionBtn = e.target.closest('.download-menu button');
+  if (actionBtn) {
+    e.stopPropagation();
+    const ci = actionBtn.dataset.chart;
+    const action = actionBtn.dataset.action;
+    const wrapper = document.getElementById(`wrapper-${ci}`);
+    const svgEl = wrapper.querySelector('svg');
+    const chartCard = wrapper.closest('.chart-card');
+    const titleEl = chartCard.querySelector('.chart-title');
+    const baseName = titleEl ? titleEl.textContent.trim() : `chart-${ci}`;
+
+    // Close menu
+    document.querySelectorAll('.download-menu.open').forEach(m => m.classList.remove('open'));
+
+    if (action === 'png') {
+      downloadPNG(svgEl, `${baseName}.png`);
+    } else if (action === 'svg') {
+      downloadSVG(svgEl, `${baseName}.svg`);
+    }
+    return;
+  }
+
+  // Close any open download menu when clicking elsewhere
+  if (!e.target.closest('.download-wrap')) {
+    document.querySelectorAll('.download-menu.open').forEach(m => m.classList.remove('open'));
+  }
+});
+
+// CSV download — use serial data when available, otherwise parse from textarea
+btnCsv.addEventListener('click', () => {
+  if (currentMode === 'rotation' && serialXYSamples.length > 0) {
+    const xyStart = serialXYSamples[0].ts;
+    const times = serialXYSamples.map(s => (s.ts - xyStart) / 1000);
+    downloadCSV_XY(serialXYSamples, times);
+  } else if (serialSamples.length > 0) {
+    const times = serialSamples.map(s => (s.ts - serialStartTime) / 1000);
+    downloadCSV(serialSamples, times);
+  } else {
+    const raw = inputEl.value.trim();
+    if (!raw) return;
+    const samples = parseData(raw);
+    if (samples.length > 0) downloadCSV(samples);
+  }
+});
+
+// ---- Serial port controls ----
+btnSerialConnect.addEventListener('click', () => {
+  if (serialRunning) {
+    disconnectSerial();
+  } else {
+    connectSerial();
+  }
+});
+
+btnClearSerial.addEventListener('click', () => {
+  serialSamples = [];
+  serialPartial = {};
+  serialBuffer = '';
+  serialStartTime = null;
+  serialXYSamples = [];
+  serialXYPartial = {};
+  serialCount.textContent = '';
+  chartsArea.innerHTML = '';
+  emptyState.style.display = 'block';
+  statsEl.innerHTML = '';
+  tableToggle.style.display = 'none';
+  btnCsv.style.display = 'none';
+  tableWrap.innerHTML = '';
+  tableWrap.classList.remove('open');
+  tableArrow.textContent = '▸';
+  inputEl.value = '';
+});
+
+// ---- Mode switching (time-domain / rotation debug) ----
+const modeTimeBtn = document.getElementById('mode-time');
+const modeRotationBtn = document.getElementById('mode-rotation');
+
+modeTimeBtn.addEventListener('click', () => {
+  if (currentMode === 'time') return;
+  currentMode = 'time';
+  modeTimeBtn.classList.add('active');
+  modeRotationBtn.classList.remove('active');
+  serialRender();
+});
+
+modeRotationBtn.addEventListener('click', () => {
+  if (currentMode === 'rotation') return;
+  currentMode = 'rotation';
+  modeRotationBtn.classList.add('active');
+  modeTimeBtn.classList.remove('active');
+  serialRender();
+});
+
+// Auto-disconnect on page unload
+window.addEventListener('beforeunload', () => {
+  if (serialRunning) {
+    serialRunning = false;
+    if (serialRefreshTimer) clearInterval(serialRefreshTimer);
+    if (serialReader) { try { serialReader.cancel(); } catch (_) {} }
+    if (serialPort) { try { serialPort.close(); } catch (_) {} }
+  }
+});
+
+// Auto-render if input has content on page load (skip if serial active)
+if (inputEl.value.trim() && !serialRunning) {
+  render();
+}
+</script>
+</body>
+</html>
+</div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zhuzhu</div><div class="author-info-description">huazhong university of science and technology</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" href="mailto:handsome_zjl@qq.com"><i class="fas fa-envelope"></i><span>Contact Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:handsome_zjl@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">哈喽这里是zhuzhu的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/15/%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8%E7%82%B8%E9%B8%A1%E6%8A%AB%E8%90%A8%E4%B8%8E%E7%B1%B3%E9%A5%AD%E4%B9%8B%E9%97%B4%E5%8F%8D%E5%A4%8D%E6%A8%AA%E8%B7%B3%E7%9A%84%E9%9D%92%E6%98%A5%E6%AE%87%E4%BA%8B/" title="关于我在炸鸡、披萨与米饭之间反复横跳的青春殇事">关于我在炸鸡、披萨与米饭之间反复横跳的青春殇事</a><time datetime="2026-07-26T09:07:39.834Z" title="更新于 2026-07-26 17:07:39">2026-07-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/20/%E4%B8%9C%E5%8D%81%E4%B8%83%E6%95%99%E5%AD%A6%E6%A5%BC%E7%9A%84%E6%B2%89%E9%BB%98/" title="东十七教学楼的沉默">东十七教学楼的沉默</a><time datetime="2026-07-26T09:07:33.960Z" title="更新于 2026-07-26 17:07:33">2026-07-26</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="card-category-list-name">生活</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E9%9D%92%E6%98%A5/" style="font-size: 1.5em; color: #99a9bf">青春</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.5em; color: #99a9bf">随笔</a> <a href="/tags/%E7%BE%8E%E9%A3%9F/" style="font-size: 1.1em; color: #999">美食</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/07/">
+            <span class="card-archive-list-date">
+              七月 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-07-26T13:06:19.313Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By zhuzhu</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.6.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.6.1"></script><script src="/js/main.js?v=5.6.1"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'WireWhisperer/WireWhisperer.github.io',
+      'data-repo-id': 'R_kgDOTjvx7w',
+      'data-category-id': 'DIC_kwDOTjvx784DCAEj',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script src="/js/starry-bg.js?v=11"></script><script src="/js/mouse-trail.js?v=6"></script><script>(function(){var b=document.getElementById("card-info-btn");if(b){b.style.cssText="background:#8954D6!important;color:#fff!important;border:none!important;border-radius:6px!important;text-decoration:none!important;padding:8px 20px!important;display:inline-block!important;transition:all 0.3s!important";b.onmouseenter=function(){b.style.background="#7a45c0"};b.onmouseleave=function(){b.style.background="#8954D6"};var c=b.querySelectorAll("span,i");for(var i=0;i<c.length;i++){c[i].style.color="#fff"}}})();</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
